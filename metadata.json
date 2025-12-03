@@ -1,0 +1,7 @@
+{
+  "name": "PesaSwift - Kenyan Digital Credit",
+  "description": "A compliant, high-performance Digital Credit Provider (DCP) application optimized for the Kenyan market. Features instant loan limit checks, M-Pesa integration simulation, and AI-driven financial advice.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
