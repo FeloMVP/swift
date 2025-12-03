@@ -1,6 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const apiKey = process.env.API_KEY || ''; // In production, this comes from secure env
+const ai = new GoogleGenAI({ apiKey });
 
 export const getFinancialAdvice = async (
   financialData: { income: string; expenses: string; goal: string }
@@ -68,20 +69,15 @@ export const analyzeLoanEligibility = async (
             eligible: { type: Type.BOOLEAN },
             reasoning: { type: Type.STRING },
             recommendedAmount: { type: Type.NUMBER }
-          },
-          propertyOrdering: ["eligible", "reasoning", "recommendedAmount"]
+          }
         }
       }
     });
 
-    // Clean up potential markdown formatting (```json ... ```)
-    let jsonString = response.text || '{}';
-    jsonString = jsonString.replace(/```json/g, '').replace(/```/g, '').trim();
-
-    const result = JSON.parse(jsonString);
+    const result = JSON.parse(response.text || '{}');
     return result;
   } catch (error) {
     console.error("Gemini Analysis Error:", error);
-    return { eligible: false, reasoning: "System maintenance. Please try again." };
+    return { eligible: false, reasoning: "System maintenance." };
   }
 };
