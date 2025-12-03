@@ -42,8 +42,7 @@ const Compliance: React.FC = () => {
             <h2 className="text-xl font-bold text-slate-800 mb-4 border-b pb-2">4. Contact Information</h2>
             <p className="text-slate-600">
               For complaints or inquiries, please contact our Data Protection Officer:<br />
-              Email: dpo@pesaswift.co.ke<br />
-              Tel: +254 700 000 000
+              Email: dpo@pesaswift.co.ke
             </p>
           </section>
         </div>
