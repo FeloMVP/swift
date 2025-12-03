@@ -74,10 +74,14 @@ export const analyzeLoanEligibility = async (
       }
     });
 
-    const result = JSON.parse(response.text || '{}');
+    // Clean up potential markdown formatting (```json ... ```)
+    let jsonString = response.text || '{}';
+    jsonString = jsonString.replace(/```json/g, '').replace(/```/g, '').trim();
+
+    const result = JSON.parse(jsonString);
     return result;
   } catch (error) {
     console.error("Gemini Analysis Error:", error);
-    return { eligible: false, reasoning: "System maintenance." };
+    return { eligible: false, reasoning: "System maintenance. Please try again." };
   }
 };
