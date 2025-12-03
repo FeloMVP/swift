@@ -1,7 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 
-const apiKey = process.env.API_KEY || ''; // In production, this comes from secure env
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const getFinancialAdvice = async (
   financialData: { income: string; expenses: string; goal: string }
@@ -69,7 +68,8 @@ export const analyzeLoanEligibility = async (
             eligible: { type: Type.BOOLEAN },
             reasoning: { type: Type.STRING },
             recommendedAmount: { type: Type.NUMBER }
-          }
+          },
+          propertyOrdering: ["eligible", "reasoning", "recommendedAmount"]
         }
       }
     });
